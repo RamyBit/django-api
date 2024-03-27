@@ -2,6 +2,7 @@ import requests
 
 # Defining the URL and pyload data
 endpoint="http://localhost:11434"
+api="http://localhost:8000/api"
 url = "http://localhost:11434/api/generate"
 
 payload ={
@@ -16,6 +17,12 @@ get_response = requests.get(endpoint)
 print(get_response.text)
 # Sent POST request
 post_response = requests.post(url, json=payload)
+
+# Get API request
+api_response = requests.get(api)
+
+# Print the API response
+print(api_response.json())
 
 # Check the response
 if post_response.status_code == 200:
