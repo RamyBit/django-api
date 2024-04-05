@@ -1,10 +1,13 @@
 from django.http import JsonResponse
 import json
 
+from books.models import Book
+
 def api_home (request, *args, **kwargs):
     response = {}
     params = request.GET
     print("params: ", params)
+    book1 = Book.objects.all().order_by('id')[0]
 
     if request.method == 'POST':
         try:
@@ -16,5 +19,7 @@ def api_home (request, *args, **kwargs):
     response['params'] = dict(params)
     response['headers'] = dict(request.headers)
     response['content_type'] = request.content_type
+    response['book_title'] = book1.title
     print("response: ", response)
+
     return JsonResponse(response)
