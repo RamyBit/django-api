@@ -19,7 +19,7 @@ print(get_response.text)
 #post_response = requests.post(url, json=payload)
 
 # Get API request
-api_response = requests.get(api, params={"no": 333}, json={"message": "Hi from client!"})
+api_response = requests.get(api)
 
 # Print the API response
 print(api_response.json())

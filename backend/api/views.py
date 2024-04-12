@@ -1,25 +1,13 @@
-from django.http import JsonResponse
-import json
-
 from books.models import Book
+from rest_framework.response import Response
+from django.forms.models import model_to_dict
+from rest_framework.decorators import api_view
 
+@api_view(["GET"])
 def api_home (request, *args, **kwargs):
     response = {}
-    params = request.GET
-    print("params: ", params)
     book1 = Book.objects.all().order_by('id')[0]
+    if book1:
+        response = model_to_dict(book1, fields=['id', 'title', 'author', 'publication_date', 'isbn', 'price'])
 
-    if request.method == 'POST':
-        try:
-            request_data = json.loads(request.body)
-            print("request_data: ", request_data)
-        except json.JSONDecodeError:
-            return JsonResponse({"error": "Invalid JSON data in request body"}, status = 400)
-    
-    response['params'] = dict(params)
-    response['headers'] = dict(request.headers)
-    response['content_type'] = request.content_type
-    response['book_title'] = book1.title
-    print("response: ", response)
-
-    return JsonResponse(response)
+    return Response(response)
