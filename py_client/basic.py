@@ -21,8 +21,12 @@ print(get_response.text)
 # Get API request
 api_response = requests.get(api)
 
+# Send API POST request
+api_post_respone = requests.post(api, {'title': 'newbook', 'author': 'newAuthor', 'publication_date': '1111', 'price':'0'})
+
 # Print the API response
 print(api_response.json())
+print(api_post_respone.json())
 
 # Check the response
 # if post_response.status_code == 200:

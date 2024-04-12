@@ -14,5 +14,7 @@ class BookSerializer(serializers.ModelSerializer):
             'book_discount'
         ]
     def get_book_discount(self,obj):
+        if not isinstance(obj, Book):
+            return None
         print(obj.id, obj.get_discount())
         return str(obj.get_discount())
