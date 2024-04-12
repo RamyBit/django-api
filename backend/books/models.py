@@ -8,6 +8,12 @@ class Book(models.Model):
     isbn = models.CharField(max_length=13)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
+    @property
+    def sale_price(self):
+        return "%.2f" %(float(self.price) * self.get_discount())
+    #AI markting model
+    def get_discount(self):
+        return 0.9
 def __str__(self):
     return self.title
 
