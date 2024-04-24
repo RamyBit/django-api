@@ -1,4 +1,5 @@
 import requests
+
 book_id = input('Enter the book id: ')
 
 try:
@@ -7,8 +8,7 @@ except:
     book_id = None
     print(f'{book_id} not a valid id')
 if book_id:
-    endpoint = f'http://localhost:8000/api/books/{book_id}/'
+    endpoint = f'http://localhost:8000/api/books/{book_id}/delete'
 
-get_response = requests.get(endpoint)
-print(get_response)
-print(get_response.json())
+get_response = requests.delete(endpoint)
+print(get_response.status_code)
